@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bizim Aşk Hikayemiz</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #ffe6e6;
+      text-align: center;
+    }
+
+    header {
+      background: linear-gradient(to right, #ff4d4d, #ff9999);
+      color: white;
+      padding: 20px;
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+
+    .heart-animation {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      color: red;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .poem {
+      font-size: 1.4em;
+      font-style: italic;
+      color: #800000;
+      margin: 20px;
+    }
+
+    .memories {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .memories img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .video-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px;
+    }
+
+    .video-container video {
+      width: 300px;
+      border-radius: 10px;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .slide img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .prev,
+    .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 50%;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    .prev:hover,
+    .next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    footer {
+      background: #ff4d4d;
+      color: white;
+      padding: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+  <body onclick="playMusic()">
+<body>
+  <header>
+    <h1>Bizim Aşk Hikayemiz</h1>
+    <p>Seninle her an bir masal gibi...</p>
+  </header>
+
+  <div class="heart-animation">❤️</div>
+
+  <div class="poem">
+    <p>"Seninle her an, yıldızların arasında kaybolmak gibi...</p>
+    <p>Ellerin dokunduğunda, dünya duruyor sanki...</p>
+    <p>Aşk, seninle bir ömür boyu aynı rüyayı görmek gibi..."</p>
+  </div>
+
+  <div class="memories">
+    <video src="https://github.com/morina-tr/.z/raw/refs/heads/main/1.mp4" autoplay loop muted playsinline></video>
+    <p>Seninle geçirdiğim tüm saniyeler tüm kareler aklıma ve kalbime kazındı..."</p>
+
+
+  </div>
+
+  <div class="video-container">
+    <video autoplay loop muted>
+      <source src="video1.mp4" type="video/mp4">
+    </video>
+    <video autoplay loop muted>
+      <source src="video2.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="slider-container">
+    <div class="slider">
+      <div class="slide"><img src="https://github.com/morina-tr/.z/blob/main/1.jpeg?raw=true" alt="Aşk Fotoğrafı"></div>
+      <div class="slide"><img src="https://github.com/morina-tr/.z/blob/main/2.jpeg?raw=true" alt="Aşk Fotoğrafı"></div>
+      <div class="slide"><img src="https://github.com/morina-tr/.z/blob/main/3.jpeg?raw=true" alt="Aşk Fotoğrafı"></div>
+      <div class="slide"><img src="https://github.com/morina-tr/.z/blob/main/4.jpeg?raw=true" alt="Aşk Fotoğrafı"></div>
+      <div class="slide"><img src="https://github.com/morina-tr/.z/blob/main/5.jpeg?raw=true" alt="Aşk Fotoğrafı"></div>
+      <div class="slide"><img src="https://github.com/morina-tr/.z/blob/main/6.jpeg?raw=true" alt="Aşk Fotoğrafı"></div>
+    </div>
+    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="next" onclick="changeSlide(1)">&#10095;</button>
+  </div>
+
+  <footer>
+    <p>Made with love by Morina</p>
+  </footer>
+  <audio id="background-music" loop>
+    <source src="https://github.com/morina-tr/.z/raw/refs/heads/main/122.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const slider = document.querySelector('.slider');
+
+    function changeSlide(step) {
+      currentIndex += step;
+      if (currentIndex >= slides.length) currentIndex = 0;
+      if (currentIndex < 0) currentIndex = slides.length - 1;
+      slider.style.transform = `translateX(${-currentIndex * 100}%)`;
+    }
+    function playMusic() {
+      let audio = document.getElementById("background-music");
+      audio.play().catch(error => console.error("Otomatik oynatma engellendi:", error));
+      document.body.onclick = null; // Tekrar tıklamayı önlemek için kaldır
+    }
+    setInterval(() => changeSlide(1), 5000);
+  </script>
+</body>
+
+</html>
